@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -132,10 +132,10 @@ function Index() {
         }
     ];
 
-    const currentLanguage = (i18n.language || 'en').split('-')[0];
-    const defaultLanguage = ['tr', 'en', 'de'].includes(currentLanguage) ? currentLanguage : 'en';
-    const destinationLanguage = ['tr', 'en', 'ru'].includes(currentLanguage) ? currentLanguage : 'en';
-    const selectedComboSection = comboSectionContent[defaultLanguage] || comboSectionContent.en;
+    const currentLanguage = useMemo(() => (i18n.language || 'en').split('-')[0], [i18n.language]);
+    const defaultLanguage = useMemo(() => ['tr', 'en', 'de'].includes(currentLanguage) ? currentLanguage : 'en', [currentLanguage]);
+    const destinationLanguage = useMemo(() => ['tr', 'en', 'ru'].includes(currentLanguage) ? currentLanguage : 'en', [currentLanguage]);
+    const selectedComboSection = useMemo(() => comboSectionContent[defaultLanguage] || comboSectionContent.en, [defaultLanguage]);
 
     const buildWhatsappLink = (text) => `${whatsappBaseUrl}?text=${encodeURIComponent(text)}`;
 
@@ -225,7 +225,7 @@ function Index() {
                     initial={{ opacity: 0, y: 100 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.3 }}
-                    viewport={{ once: false, amount: 0.3 }}
+                    viewport={{ once: true, amount: 0.3 }}
                 >
                     <div className="text-center flex-column d-flex align-items-center justify-content-center gap-3">                        <span>{t('destinations.subtitle')}</span>
                         <div className=" d-flex align-items-center gap-2">
@@ -240,7 +240,7 @@ function Index() {
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
                     transition={{ duration: 1.2, delay: 0.4 }}
-                    viewport={{ once: false, amount: 0.3 }}
+                    viewport={{ once: true, amount: 0.3 }}
                 >
                     <Splide
                         hasTrack={false}
@@ -277,7 +277,7 @@ function Index() {
                             return (
                                 <SplideSlide key={dest.id}>
                                     <div className="dest-card position-relative">                                        <div className="dest-img overflow-hidden rounded">
-                                            <img src={selectedDestinationTranslation.image} className='img-fluid' alt={selectedDestinationTranslation.name} />
+                                            <img src={selectedDestinationTranslation.image} className='img-fluid' alt={selectedDestinationTranslation.name} loading="lazy" decoding="async" />
                                             <a 
                                                 href={destinationWhatsappLink}
                                                 target="_blank" 
@@ -351,6 +351,8 @@ function Index() {
                                                 src={selectedCardImage}
                                                 alt={selectedCardTranslation.title}
                                                 className="combo-card-image combo-card-image-clickable"
+                                                loading="lazy"
+                                                decoding="async"
                                                 onClick={() => setModalImage(selectedCardImage)}
                                                 onError={(event) => {
                                                     event.currentTarget.onerror = null;
@@ -385,7 +387,7 @@ function Index() {
                     initial={{ opacity: 0, y: 100 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.3 }}
-                    viewport={{ once: false, amount: 0.3 }}
+                    viewport={{ once: true, amount: 0.3 }}
                 >
                     <div className="text-center flex-column d-flex align-items-center justify-content-center gap-3">                        <span>{t('discover.subtitle')}</span>
                         <div className=" d-flex align-items-center gap-2">
@@ -407,9 +409,9 @@ function Index() {
                             initial={{ opacity: 0, x: 100 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.6, delay: 0.3 + index * 0.2 }}
-                            viewport={{ once: false, amount: 0.3 }}
+                            viewport={{ once: true, amount: 0.3 }}
                         >
-                            <img src={selectedDiscoverTranslation.image} className="img-fluid" alt={selectedDiscoverTranslation.name} />
+                            <img src={selectedDiscoverTranslation.image} className="img-fluid" alt={selectedDiscoverTranslation.name} loading="lazy" decoding="async" />
                             <div className="discover-card-content position-absolute d-flex flex-column align-items-center justify-content-center text-center">
                                 <span><i className="bi bi-geo-alt-fill"></i> {selectedDiscoverTranslation.name}</span>
                                 <h2 className="mt-4">{selectedDiscoverTranslation.pere}</h2>
@@ -488,7 +490,7 @@ function Index() {
                                     <div className="row align-items-center">
                                         <div className="col-lg-6">
                                             <div className="test-img d-flex align-items-center justify-content-center">
-                                                <img src={item.image} className="img-fluid" alt="testimonial" />
+                                                <img src={item.image} className="img-fluid" alt="testimonial" loading="lazy" decoding="async" />
                                             </div>
                                         </div>
                                         <div className="col-lg-6">
@@ -500,7 +502,7 @@ function Index() {
                                                     ))}
                                                 </div>
                                                 <div className="test-user mt-3 d-flex align-items-center gap-2">
-                                                    <img src={item.user.avatar} className="img-fluid" alt={item.user.name} />
+                                                    <img src={item.user.avatar} className="img-fluid" alt={item.user.name} loading="lazy" decoding="async" />
                                                     <div className="test-user-info">
                                                         <h3>{item.user.name}</h3>
                                                         <p className="m-0">{item.user.info[i18n.language]}</p>
