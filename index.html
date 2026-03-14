@@ -245,11 +245,65 @@
   <script type="module" src="/src/main.jsx"></script>
 
   <!-- 📞 WhatsApp Butonu -->
-  <a href="https://wa.me/905331530229?text=Merhaba,%20Antalya%20rafting%20turları%20hakkında%20bilgi%20almak%20istiyorum."
+  <a id="whatsapp-float-link" href="https://wa.me/905331530229?text=Merhaba,%20Antalya%20rafting%20turları%20hakkında%20bilgi%20almak%20istiyorum."
     class="whatsapp-float" target="_blank" rel="noopener noreferrer"
     title="Antalya Rafting Rezervasyonu - WhatsApp İletişim">
-    <img src="./src/assets/whatsapp.png" alt="Antalya Rafting WhatsApp İletişim" loading="lazy" />
+    <img id="whatsapp-float-image" src="./src/assets/whatsapp.png" alt="Antalya Rafting WhatsApp İletişim" loading="lazy" />
   </a>
+
+  <script>
+    (function () {
+      var whatsappByLanguage = {
+        tr: {
+          message: 'Merhaba, Antalya rafting turları hakkında bilgi almak istiyorum.',
+          title: 'Antalya Rafting Rezervasyonu - WhatsApp İletişim',
+          alt: 'Antalya Rafting WhatsApp İletişim'
+        },
+        en: {
+          message: 'Hello, I would like to get information about Antalya rafting tours.',
+          title: 'Antalya Rafting Reservation - WhatsApp Contact',
+          alt: 'Antalya Rafting WhatsApp Contact'
+        },
+        ru: {
+          message: 'Здравствуйте, хочу получить информацию о рафтинг-турах в Анталье.',
+          title: 'Бронирование рафтинга в Анталье - WhatsApp',
+          alt: 'Контакт WhatsApp для рафтинга в Анталье'
+        }
+      };
+
+      function resolveLanguage() {
+        var saved = (localStorage.getItem('i18nextLng') || navigator.language || 'tr').toLowerCase();
+        var shortCode = saved.split('-')[0];
+        return whatsappByLanguage[shortCode] ? shortCode : 'tr';
+      }
+
+      function applyWhatsappText() {
+        var lang = resolveLanguage();
+        var content = whatsappByLanguage[lang];
+        var link = document.getElementById('whatsapp-float-link');
+        var image = document.getElementById('whatsapp-float-image');
+
+        if (!link || !image) {
+          return;
+        }
+
+        link.href = 'https://wa.me/905331530229?text=' + encodeURIComponent(content.message);
+        link.title = content.title;
+        image.alt = content.alt;
+      }
+
+      applyWhatsappText();
+
+      var lastLang = resolveLanguage();
+      setInterval(function () {
+        var currentLang = resolveLanguage();
+        if (currentLang !== lastLang) {
+          lastLang = currentLang;
+          applyWhatsappText();
+        }
+      }, 400);
+    })();
+  </script>
 </body>
 
 </html>
