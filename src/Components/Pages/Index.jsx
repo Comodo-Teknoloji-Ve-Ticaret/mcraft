@@ -288,20 +288,35 @@ function Index() {
                                             </a>
                                         </div>
                                         <div className="dest-content p-4 rounded border top-0 start-0 mt-3 position-absolute">
-                                            <i className="fa-solid fa-arrow-right dest-arrow position-absolute"></i>                                            <h2>{selectedDestinationTranslation.name}</h2>
-                                            <p>{selectedDestinationTranslation.pere}</p>                                            <div className="dest-day border-top pt-3">
-                                                <i className="bi bi-send-fill me-2"></i>
-                                                <span>{destinationDayLabel}</span>
-                                            </div>
                                             <a
                                                 href={destinationWhatsappLink}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="combo-reservation-btn mt-3"
+                                                className="dest-arrow position-absolute"
+                                                aria-label={destinationBuyLabel}
                                             >
-                                                <i className="bi bi-whatsapp"></i>
-                                                {destinationBuyLabel}
+                                                <i className="fa-solid fa-arrow-right"></i>
                                             </a>
+                                            <a
+                                                href={destinationWhatsappLink}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="text-decoration-none text-reset"
+                                            >
+                                                <h2>{selectedDestinationTranslation.name}</h2>
+                                            </a>
+                                            <a
+                                                href={destinationWhatsappLink}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="text-decoration-none text-reset"
+                                            >
+                                                <p>{selectedDestinationTranslation.pere}</p>
+                                            </a>
+                                            <div className="dest-day border-top pt-3">
+                                                <i className="bi bi-send-fill me-2"></i>
+                                                <span>{destinationDayLabel}</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </SplideSlide>
