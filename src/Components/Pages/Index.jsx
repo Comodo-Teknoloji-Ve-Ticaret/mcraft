@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -25,6 +25,7 @@ import LanguageSwitcher from '../LanguageSwitcher';
 function Index() {
     const { t, i18n } = useTranslation();
     const destinationsRef = React.useRef(null);
+    const [modalImage, setModalImage] = useState(null);
 
     const scrollToDestinations = () => {
         destinationsRef.current?.scrollIntoView({
@@ -32,6 +33,106 @@ function Index() {
             block: 'start'
         });
     };
+
+    const comboSectionContent = {
+        tr: {
+            badge: '4LU COMBO',
+            title: 'Buyuk Macera Kartlari',
+            description: 'Ingilizce, Turkce ve Almanca afisler ile 4 farkli deneyimi tek alanda inceleyin.'
+        },
+        en: {
+            badge: '4-IN-1 COMBO',
+            title: 'Large Adventure Cards',
+            description: 'Review four experiences in one place with English, Turkish, and German visuals.'
+        },
+        de: {
+            badge: '4ER KOMBO',
+            title: 'Grosse Abenteuerkarten',
+            description: 'Sehen Sie vier Erlebnisse in einem Bereich mit englischen, turkischen und deutschen Bildern.'
+        }
+    };
+
+    const comboCards = [
+        {
+            id: 'combo-4-plus-1',
+            images: {
+                tr: '/Images/Afis/tr/tazı_xtreme_tr_4&1.jpeg',
+                en: '/Images/Afis/en/tazı_xtreme_en_4&1.jpeg',
+                de: '/Images/Afis/de/tazı_xtreme_de_4&1.jpeg'
+            },
+            translations: {
+                tr: {
+                    chip: '4+1 COMBO',
+                    title: '4+1 Tazi Xtreme Combo',
+                    description: 'Aktiviteleri tek afiste karsilastirip en iyi paketi hizli secin.'
+                },
+                en: {
+                    chip: '4+1 COMBO',
+                    title: '4+1 Tazi Xtreme Combo',
+                    description: 'Compare experiences in one poster and pick the best package quickly.'
+                },
+                de: {
+                    chip: '4+1 KOMBO',
+                    title: '4+1 Tazi Xtreme Kombi',
+                    description: 'Vergleichen Sie Erlebnisse auf einem Poster und wahlen Sie schnell das beste Paket.'
+                }
+            }
+        },
+        {
+            id: 'combo-5-plus-1',
+            images: {
+                tr: '/Images/Afis/tr/adventure_day_tazı_tr_5&1.jpeg',
+                en: '/Images/Afis/en/adventure_day_tazı_en_5&1.jpeg',
+                de: '/Images/Afis/de/adventure_day_tazı_de_5&1.jpeg'
+            },
+            translations: {
+                tr: {
+                    chip: '5+1 COMBO',
+                    title: '5+1 Adventure Day Combo',
+                    description: 'Aktiviteleri tek afiste karsilastirip en iyi paketi hizli secin.'
+                },
+                en: {
+                    chip: '5+1 COMBO',
+                    title: '5+1 Adventure Day Combo',
+                    description: 'Compare experiences in one poster and pick the best package quickly.'
+                },
+                de: {
+                    chip: '5+1 KOMBO',
+                    title: '5+1 Adventure Day Kombi',
+                    description: 'Vergleichen Sie Erlebnisse auf einem Poster und wahlen Sie schnell das beste Paket.'
+                }
+            }
+        },
+        {
+            id: 'combo-6-plus-1',
+            images: {
+                tr: '/Images/Afis/tr/all_in_tazı_tr_6&1.jpeg',
+                en: '/Images/Afis/en/all_in_tazı_en_6&1.jpeg',
+                de: '/Images/Afis/de/all_in_tazı_de_6&1.jpeg'
+            },
+            translations: {
+                tr: {
+                    chip: '6+1 COMBO',
+                    title: '6+1 All In Combo',
+                    description: 'Aktiviteleri tek afiste karsilastirip en iyi paketi hizli secin.'
+                },
+                en: {
+                    chip: '6+1 COMBO',
+                    title: '6+1 All In Combo',
+                    description: 'Compare experiences in one poster and pick the best package quickly.'
+                },
+                de: {
+                    chip: '6+1 KOMBO',
+                    title: '6+1 All In Kombi',
+                    description: 'Vergleichen Sie Erlebnisse auf einem Poster und wahlen Sie schnell das beste Paket.'
+                }
+            }
+        }
+    ];
+
+    const currentLanguage = (i18n.language || 'en').split('-')[0];
+    const defaultLanguage = ['tr', 'en', 'de'].includes(currentLanguage) ? currentLanguage : 'en';
+    const selectedComboSection = comboSectionContent[defaultLanguage] || comboSectionContent.en;
 
     return (
         <>
@@ -166,6 +267,58 @@ function Index() {
                         </SplideTrack>
                     </Splide>
                 </motion.div>
+            </div>
+            {/* Combo Showcase */}
+            <div className="discover py-5">
+                <div className="container">
+                    <div className="combo-showcase">
+                        <div className="combo-showcase-head">
+                            <div>
+                                <p className="combo-eyebrow mb-2">{selectedComboSection.badge}</p>
+                                <h3 className="combo-title mb-2">{selectedComboSection.title}</h3>
+                                <p className="combo-subtitle mb-0">{selectedComboSection.description}</p>
+                            </div>
+                        </div>
+
+                        <div className="row g-4 mt-1">
+                            {comboCards.map(card => {
+                                const selectedCardTranslation = card.translations[defaultLanguage] || card.translations.en;
+                                const selectedCardImage = card.images[defaultLanguage] || card.images.en;
+
+                                return (
+                                    <div className="col-lg-4 col-md-6 col-sm-6" key={card.id}>
+                                        <article className="combo-card">
+                                            <img
+                                                src={encodeURI(selectedCardImage)}
+                                                alt={selectedCardTranslation.title}
+                                                className="combo-card-image combo-card-image-clickable"
+                                                onClick={() => setModalImage(encodeURI(selectedCardImage))}
+                                                onError={(event) => {
+                                                    event.currentTarget.onerror = null;
+                                                    event.currentTarget.src = encodeURI(card.images.en);
+                                                }}
+                                            />
+                                            <div className="combo-card-content">
+                                                <span className="combo-card-chip">{selectedCardTranslation.chip}</span>
+                                                <h4>{selectedCardTranslation.title}</h4>
+                                                <p>{selectedCardTranslation.description}</p>
+                                                <a 
+                                                    href="https://wa.me/905331530229?text=Hello,%20I%20am%20interested%20in%20the%204+1%20Combo%20package.%20Please%20provide%20more%20details." 
+                                                    target="_blank" 
+                                                    rel="noopener noreferrer"
+                                                    className="combo-reservation-btn"
+                                                >
+                                                    <i className="bi bi-whatsapp"></i>
+                                                    RESERVATION
+                                                </a>
+                                            </div>
+                                        </article>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
+                </div>
             </div>
             {/* Discover */}
             <div className="discover py-5">
@@ -303,6 +456,17 @@ function Index() {
                     </div>
                 </div>
             </div>
+            {/* Image Modal */}
+            {modalImage && (
+                <div className="combo-modal" onClick={() => setModalImage(null)}>
+                    <div className="combo-modal-content" onClick={(e) => e.stopPropagation()}>
+                        <button className="combo-modal-close" onClick={() => setModalImage(null)}>
+                            <i className="bi bi-x-lg"></i>
+                        </button>
+                        <img src={modalImage} alt="Combo Card" className="combo-modal-image" />
+                    </div>
+                </div>
+            )}
             {/* Footer */}
             <Footer />
         </>

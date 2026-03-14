@@ -17,13 +17,21 @@ function Activities() {
     const [selectedCategory, setSelectedCategory] = useState('all');
     const { t, i18n } = useTranslation();
 
-    const activities = activitiesData.map(activity => ({
-        id: activity.id,
-        image: activity.translations[i18n.language].image,
-        title: activity.translations[i18n.language].title,
-        category: activity.category[i18n.language],
-        description: activity.translations[i18n.language].description
-    }));
+    const currentLanguage = (i18n.language || 'en').split('-')[0];
+    const activityLanguage = ['tr', 'en', 'ru'].includes(currentLanguage) ? currentLanguage : 'en';
+
+    const activities = activitiesData.map(activity => {
+        const selectedTranslation = activity.translations[activityLanguage] || activity.translations.en;
+        const selectedCategory = activity.category[activityLanguage] || activity.category.en;
+
+        return {
+            id: activity.id,
+            image: selectedTranslation.image,
+            title: selectedTranslation.title,
+            category: selectedCategory,
+            description: selectedTranslation.description
+        };
+    });
 
     const filterByCategory = (category) => {
         setSelectedCategory(category);
@@ -94,6 +102,7 @@ function Activities() {
                                 </ul>
                             </div>
                         </div>
+
                         <div className="col-lg-8">
                             {filteredActivities.map(activity => (
                                 <div className="col-lg-12" key={activity.id}>

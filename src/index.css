@@ -1418,6 +1418,308 @@ body {
     transform: scale(1) !important;
 }
 
+.combo-showcase {
+    border-radius: 30px;
+    border: 1px solid #d2dff6;
+    background: linear-gradient(130deg, #f6faff 0%, #eff7ff 45%, #f8f4ff 100%);
+    padding: 24px;
+}
+
+.combo-showcase-head {
+    margin-bottom: 24px;
+}
+
+.combo-showcase-head > div {
+    max-width: 100%;
+}
+
+.combo-eyebrow {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: #1c4f9e;
+}
+
+.combo-title {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: #15243d;
+}
+
+.combo-subtitle {
+    color: #375172;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.combo-lang-switch {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid #c8d7f3;
+    border-radius: 999px;
+    padding: 4px;
+    background-color: #ffffff;
+}
+
+.combo-lang-btn {
+    border: 0;
+    background: transparent;
+    color: #264c86;
+    border-radius: 999px;
+    min-width: 62px;
+    height: 36px;
+    font-weight: 700;
+    transition: all var(--transition-regular);
+}
+
+.combo-lang-btn.active {
+    color: #ffffff;
+    background: var(--prim-grident);
+}
+
+.combo-card {
+    min-height: 310px;
+    border-radius: 24px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 42px rgba(28, 64, 118, 0.17);
+    transition: transform var(--transition-regular);
+}
+
+.combo-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 28px 50px rgba(28, 64, 118, 0.25);
+}
+
+.combo-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(12, 31, 53, 0.08) 28%, rgba(8, 19, 33, 0.88) 100%);
+}
+
+.combo-card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-slow);
+}
+
+.combo-card:hover .combo-card-image {
+    transform: scale(1.08);
+}
+
+.combo-card-content {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    padding: 24px;
+    color: var(--white);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.combo-card-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #112744;
+    background-color: rgba(255, 255, 255, 0.92);
+}
+
+.combo-card-content h4 {
+    margin-top: 10px;
+    margin-bottom: 8px;
+    font-size: 1.15rem;
+    font-weight: 800;
+    line-height: 1.3;
+}
+
+.combo-card-content p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 0.85rem;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.combo-card-image-clickable {
+    cursor: pointer;
+}
+
+.combo-card-image-clickable:hover {
+    opacity: 0.9;
+}
+
+.combo-reservation-btn {
+    background: var(--prim-grident);
+    border: 0;
+    color: white;
+    padding: 8px 24px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    border-radius: 50px;
+    margin: 8px auto 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all var(--transition-regular);
+    width: fit-content;
+    box-shadow: 0 4px 15px rgba(68, 0, 231, 0.3);
+}
+
+.combo-reservation-btn:hover {
+    background: var(--prim-grident);
+    opacity: 0.95;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(68, 0, 231, 0.4);
+}
+
+.combo-reservation-btn i {
+    font-size: 0.9rem;
+}
+
+/* Modal Styles */
+.combo-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.92);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    padding: 20px;
+    overflow: auto;
+}
+
+.combo-modal-content {
+    position: relative;
+    max-width: 95vw;
+    max-height: 95vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.combo-modal-image {
+    max-width: 100%;
+    max-height: 90vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.combo-modal-close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid white;
+    color: white;
+    font-size: 2.5rem;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all var(--transition-regular);
+    z-index: 10000;
+}
+
+.combo-modal-close:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: rotate(90deg);
+}
+
+@media screen and (max-width:1199px) {
+    .combo-card {
+        min-height: 300px;
+    }
+}
+
+@media screen and (max-width:991px) {
+    .combo-card {
+        min-height: 290px;
+    }
+}
+
+@media screen and (max-width:767px) {
+    .combo-showcase {
+        border-radius: 22px;
+        padding: 16px;
+    }
+
+    .combo-showcase-head {
+        margin-bottom: 18px;
+    }
+
+    .combo-title {
+        font-size: 1.4rem;
+    }
+
+    .combo-subtitle {
+        font-size: 0.85rem;
+    }
+
+    .combo-card {
+        min-height: 280px;
+    }
+
+    .combo-card-content {
+        padding: 16px;
+    }
+
+    .combo-card-content h4 {
+        font-size: 1rem;
+    }
+
+    .combo-card-content p {
+        font-size: 0.75rem;
+    }
+
+    .combo-reservation-btn {
+        padding: 6px 16px;
+        font-size: 0.7rem;
+        gap: 6px;
+    }
+
+    .combo-modal-close {
+        top: 12px;
+        right: 15px;
+        width: 40px;
+        height: 40px;
+        font-size: 1.8rem;
+    }
+}
+
 
 /* footer  */
 
