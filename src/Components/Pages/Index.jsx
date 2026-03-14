@@ -27,6 +27,7 @@ function Index() {
     const destinationsRef = React.useRef(null);
     const [modalImage, setModalImage] = useState(null);
     const getPublicAssetUrl = (path) => encodeURI(`${import.meta.env.BASE_URL}${path.replace(/^\/+/, '')}`);
+    const whatsappBaseUrl = 'https://wa.me/905331530229';
 
     const scrollToDestinations = () => {
         destinationsRef.current?.scrollIntoView({
@@ -133,7 +134,36 @@ function Index() {
 
     const currentLanguage = (i18n.language || 'en').split('-')[0];
     const defaultLanguage = ['tr', 'en', 'de'].includes(currentLanguage) ? currentLanguage : 'en';
+    const destinationLanguage = ['tr', 'en', 'ru'].includes(currentLanguage) ? currentLanguage : 'en';
     const selectedComboSection = comboSectionContent[defaultLanguage] || comboSectionContent.en;
+
+    const buildWhatsappLink = (text) => `${whatsappBaseUrl}?text=${encodeURIComponent(text)}`;
+
+    const createComboWhatsappMessage = (comboTitle) => {
+        const messages = {
+            tr: `Merhaba, ${comboTitle} paketi icin fiyat ve rezervasyon bilgisi almak istiyorum.`,
+            en: `Hello, I would like pricing and reservation details for the ${comboTitle} package.`,
+            de: `Hallo, ich moechte Preis- und Reservierungsinformationen fuer das Paket ${comboTitle} erhalten.`
+        };
+
+        return messages[defaultLanguage] || messages.en;
+    };
+
+    const createActivityWhatsappMessage = (activityName) => {
+        const messages = {
+            tr: `Merhaba, ${activityName} aktivitesi icin rezervasyon yapmak istiyorum.`,
+            en: `Hello, I want to make a reservation for ${activityName}.`,
+            ru: `Здравствуйте, хочу забронировать активность: ${activityName}.`
+        };
+
+        return messages[destinationLanguage] || messages.en;
+    };
+
+    const comboReservationLabel = {
+        tr: 'REZERVASYON',
+        en: 'RESERVATION',
+        de: 'RESERVIERUNG'
+    }[defaultLanguage] || 'RESERVATION';
 
     return (
         <>
@@ -238,28 +268,40 @@ function Index() {
                         extensions={{ AutoScroll }}
                     >
                         <SplideTrack>                            {Destination.map(dest => {
-                            const t = dest.translations?.[i18n.language];
-                            if (!t) return null; // seçilen dilde veri yoksa atla
+                            const selectedDestinationTranslation = dest.translations?.[destinationLanguage] || dest.translations?.en;
+                            if (!selectedDestinationTranslation) return null;
+                            const destinationWhatsappLink = buildWhatsappLink(createActivityWhatsappMessage(selectedDestinationTranslation.name));
+                            const destinationBuyLabel = dest.buy?.[destinationLanguage] || dest.buy?.en;
+                            const destinationDayLabel = dest.days?.[destinationLanguage] || dest.days?.en;
 
                             return (
                                 <SplideSlide key={dest.id}>
                                     <div className="dest-card position-relative">                                        <div className="dest-img overflow-hidden rounded">
-                                            <img src={t.image} className='img-fluid' alt={t.name} />
+                                            <img src={selectedDestinationTranslation.image} className='img-fluid' alt={selectedDestinationTranslation.name} />
                                             <a 
-                                                href="https://wa.me/905331530229?text=Hello,%20I%20am%20interested%20in%20your%20services" 
+                                                href={destinationWhatsappLink}
                                                 target="_blank" 
                                                 rel="noopener noreferrer"
                                                 className="dest-price position-absolute top-0 end-0"
                                             >
-                                                {dest.buy?.[i18n.language]}
+                                                {destinationBuyLabel}
                                             </a>
                                         </div>
                                         <div className="dest-content p-4 rounded border top-0 start-0 mt-3 position-absolute">
-                                            <i className="fa-solid fa-arrow-right dest-arrow position-absolute"></i>                                            <h2>{t.name}</h2>
-                                            <p>{t.pere}</p>                                            <div className="dest-day border-top pt-3">
+                                            <i className="fa-solid fa-arrow-right dest-arrow position-absolute"></i>                                            <h2>{selectedDestinationTranslation.name}</h2>
+                                            <p>{selectedDestinationTranslation.pere}</p>                                            <div className="dest-day border-top pt-3">
                                                 <i className="bi bi-send-fill me-2"></i>
-                                                <span>{dest.days?.[i18n.language]}</span>
+                                                <span>{destinationDayLabel}</span>
                                             </div>
+                                            <a
+                                                href={destinationWhatsappLink}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="combo-reservation-btn mt-3"
+                                            >
+                                                <i className="bi bi-whatsapp"></i>
+                                                {destinationBuyLabel}
+                                            </a>
                                         </div>
                                     </div>
                                 </SplideSlide>
@@ -285,6 +327,7 @@ function Index() {
                             {comboCards.map(card => {
                                 const selectedCardTranslation = card.translations[defaultLanguage] || card.translations.en;
                                 const selectedCardImage = getPublicAssetUrl(card.images[defaultLanguage] || card.images.en);
+                                const comboWhatsappLink = buildWhatsappLink(createComboWhatsappMessage(selectedCardTranslation.title));
 
                                 return (
                                     <div className="col-lg-4 col-md-6 col-sm-6" key={card.id}>
@@ -304,13 +347,13 @@ function Index() {
                                                 <h4>{selectedCardTranslation.title}</h4>
                                                 <p>{selectedCardTranslation.description}</p>
                                                 <a 
-                                                    href="https://wa.me/905331530229?text=Hello,%20I%20am%20interested%20in%20the%204+1%20Combo%20package.%20Please%20provide%20more%20details." 
+                                                    href={comboWhatsappLink}
                                                     target="_blank" 
                                                     rel="noopener noreferrer"
                                                     className="combo-reservation-btn"
                                                 >
                                                     <i className="bi bi-whatsapp"></i>
-                                                    RESERVATION
+                                                    {comboReservationLabel}
                                                 </a>
                                             </div>
                                         </article>
@@ -339,8 +382,8 @@ function Index() {
                     </div>
                 </motion.div>
                 <div className="row px-5 my-5 mx-0 gap-3 align-items-center justify-content-center">                    {discoverData.map((item, index) => {
-                    const t = item.translations?.[i18n.language];
-                    if (!t) return null;
+                    const selectedDiscoverTranslation = item.translations?.[destinationLanguage] || item.translations?.en;
+                    if (!selectedDiscoverTranslation) return null;
 
                     return (
                         <motion.div
@@ -351,10 +394,10 @@ function Index() {
                             transition={{ duration: 0.6, delay: 0.3 + index * 0.2 }}
                             viewport={{ once: false, amount: 0.3 }}
                         >
-                            <img src={t.image} className="img-fluid" alt={t.name} />
+                            <img src={selectedDiscoverTranslation.image} className="img-fluid" alt={selectedDiscoverTranslation.name} />
                             <div className="discover-card-content position-absolute d-flex flex-column align-items-center justify-content-center text-center">
-                                <span><i className="bi bi-geo-alt-fill"></i> {t.name}</span>
-                                <h2 className="mt-4">{t.pere}</h2>
+                                <span><i className="bi bi-geo-alt-fill"></i> {selectedDiscoverTranslation.name}</span>
+                                <h2 className="mt-4">{selectedDiscoverTranslation.pere}</h2>
                             </div>
                         </motion.div>
                     );
