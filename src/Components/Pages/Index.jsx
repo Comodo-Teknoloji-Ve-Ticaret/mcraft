@@ -26,6 +26,7 @@ function Index() {
     const { t, i18n } = useTranslation();
     const destinationsRef = React.useRef(null);
     const [modalImage, setModalImage] = useState(null);
+    const getPublicAssetUrl = (path) => encodeURI(`${import.meta.env.BASE_URL}${path.replace(/^\/+/, '')}`);
 
     const scrollToDestinations = () => {
         destinationsRef.current?.scrollIntoView({
@@ -56,9 +57,9 @@ function Index() {
         {
             id: 'combo-4-plus-1',
             images: {
-                tr: '/Images/Afis/tr/tazı_xtreme_tr_4&1.jpeg',
-                en: '/Images/Afis/en/tazı_xtreme_en_4&1.jpeg',
-                de: '/Images/Afis/de/tazı_xtreme_de_4&1.jpeg'
+                tr: 'Images/Afis/tr/tazı_xtreme_tr_4&1.jpeg',
+                en: 'Images/Afis/en/tazı_xtreme_en_4&1.jpeg',
+                de: 'Images/Afis/de/tazı_xtreme_de_4&1.jpeg'
             },
             translations: {
                 tr: {
@@ -81,9 +82,9 @@ function Index() {
         {
             id: 'combo-5-plus-1',
             images: {
-                tr: '/Images/Afis/tr/adventure_day_tazı_tr_5&1.jpeg',
-                en: '/Images/Afis/en/adventure_day_tazı_en_5&1.jpeg',
-                de: '/Images/Afis/de/adventure_day_tazı_de_5&1.jpeg'
+                tr: 'Images/Afis/tr/adventure_day_tazı_tr_5&1.jpeg',
+                en: 'Images/Afis/en/adventure_day_tazı_en_5&1.jpeg',
+                de: 'Images/Afis/de/adventure_day_tazı_de_5&1.jpeg'
             },
             translations: {
                 tr: {
@@ -106,9 +107,9 @@ function Index() {
         {
             id: 'combo-6-plus-1',
             images: {
-                tr: '/Images/Afis/tr/all_in_tazı_tr_6&1.jpeg',
-                en: '/Images/Afis/en/all_in_tazı_en_6&1.jpeg',
-                de: '/Images/Afis/de/all_in_tazı_de_6&1.jpeg'
+                tr: 'Images/Afis/tr/all_in_tazı_tr_6&1.jpeg',
+                en: 'Images/Afis/en/all_in_tazı_en_6&1.jpeg',
+                de: 'Images/Afis/de/all_in_tazı_de_6&1.jpeg'
             },
             translations: {
                 tr: {
@@ -283,19 +284,19 @@ function Index() {
                         <div className="row g-4 mt-1">
                             {comboCards.map(card => {
                                 const selectedCardTranslation = card.translations[defaultLanguage] || card.translations.en;
-                                const selectedCardImage = card.images[defaultLanguage] || card.images.en;
+                                const selectedCardImage = getPublicAssetUrl(card.images[defaultLanguage] || card.images.en);
 
                                 return (
                                     <div className="col-lg-4 col-md-6 col-sm-6" key={card.id}>
                                         <article className="combo-card">
                                             <img
-                                                src={encodeURI(selectedCardImage)}
+                                                src={selectedCardImage}
                                                 alt={selectedCardTranslation.title}
                                                 className="combo-card-image combo-card-image-clickable"
-                                                onClick={() => setModalImage(encodeURI(selectedCardImage))}
+                                                onClick={() => setModalImage(selectedCardImage)}
                                                 onError={(event) => {
                                                     event.currentTarget.onerror = null;
-                                                    event.currentTarget.src = encodeURI(card.images.en);
+                                                    event.currentTarget.src = getPublicAssetUrl(card.images.en);
                                                 }}
                                             />
                                             <div className="combo-card-content">
