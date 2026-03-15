@@ -17,11 +17,11 @@
 
   <!-- Aktiviteler Sayfası -->
   <url>
-    <loc>https://mcraftantalya.com/activities</loc>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://mcraftantalya.com/activities"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://mcraftantalya.com/activities"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://mcraftantalya.com/activities"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://mcraftantalya.com/activities"/>
+    <loc>https://mcraftantalya.com/#/activities</loc>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://mcraftantalya.com/#/activities"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mcraftantalya.com/#/activities"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://mcraftantalya.com/#/activities"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://mcraftantalya.com/#/activities"/>
     <lastmod>2026-03-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
@@ -29,7 +29,7 @@
 
   <!-- İletişim Sayfası -->
   <url>
-    <loc>https://mcraftantalya.com/contact</loc>
+    <loc>https://mcraftantalya.com/#/contact</loc>
     <lastmod>2026-03-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
