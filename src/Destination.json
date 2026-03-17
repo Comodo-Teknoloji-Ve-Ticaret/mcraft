@@ -15,17 +15,17 @@
             "tr": {
                 "name": "Rafting Macerası",
                 "pere": "Adrenalin dolu dalgalarla mücadele edin, doğanın gücünü hissedin.",
-                "image": "Images/rafting.JPG"
+                "image": "Images/rafting.jpeg"
             },
             "en": {
                 "name": "Rafting Adventure",
                 "pere": "Fight the adrenaline-filled waves and feel the power of nature.",
-                "image": "Images/rafting.JPG"
+                "image": "Images/rafting.jpeg"
             },
             "ru": {
                 "name": "Рафтинг приключение",
                 "pere": "Боритесь с волнами, полными адреналина, почувствуйте силу природы.",
-                "image": "Images/rafting.JPG"
+                "image": "Images/rafting.jpeg"
             }
         },
         "location": {
@@ -50,17 +50,17 @@
             "tr": {
                 "name": "Quad (ATV) Safari",
                 "pere": "Tozlu patikalarda hız ve özgürlüğün tadını çıkarın.",
-                "image": "Images/buggy.jpg"
+                "image": "Images/atv.jpeg"
             },
             "en": {
                 "name": "Quad (ATV) Safari",
                 "pere": "Enjoy speed and freedom on dusty trails.",
-                "image": "Images/buggy.jpg"
+                "image": "Images/atv.jpeg"
             },
             "ru": {
                 "name": "Квадроцикл (ATV) сафари",
                 "pere": "Наслаждайтесь скоростью и свободой на пыльных тропах.",
-                "image": "Images/buggy.jpg"
+                "image": "Images/atv.jpeg"
             }
         },
         "location": {
@@ -85,17 +85,17 @@
             "tr": {
                 "name": "Balık Tutma Keyfi",
                 "pere": "Sakin ve huzurlu anlarda doğayla baş başa balık tutmanın keyfi.",
-                "image": "Images/fishing.jpg"
+                "image": "Images/fishing.jpeg"
             },
             "en": {
                 "name": "Fishing Delight",
                 "pere": "The pleasure of fishing peacefully and quietly in nature.",
-                "image": "Images/fishing.jpg"
+                "image": "Images/fishing.jpeg"
             },
             "ru": {
                 "name": "Удовольствие от рыбалки",
                 "pere": "Удовольствие от тихой и спокойной рыбалки на природе.",
-                "image": "Images/fishing.jpg"
+                "image": "Images/fishing.jpeg"
             }
         },
         "location": {
@@ -155,17 +155,17 @@
             "tr": {
                 "name": "Jeep Safari",
                 "pere": "Keşfedilmemiş rotalarda jeep ile maceraya atılın.",
-                "image": "Images/jeepsafari.jpg"
+                "image": "Images/jeep.jpeg"
             },
             "en": {
                 "name": "Jeep Safari",
                 "pere": "Embark on an adventure with a jeep on undiscovered routes.",
-                "image": "Images/jeepsafari.jpg"
+                "image": "Images/jeep.jpeg"
             },
             "ru": {
                 "name": "Джип-сафари",
                 "pere": "Отправляйтесь в приключение на джипе по неизведанным маршрутам.",
-                "image": "Images/jeepsafari.jpg"
+                "image": "Images/jeep.jpeg"
             }
         },
         "location": {
@@ -174,6 +174,7 @@
             "ru": "Природная тропа"
         }
     },
+
     {
         "id": 6,
         "buy": {
@@ -225,17 +226,17 @@
             "tr": {
                 "name": "Tazı Kanyonu Turu",
                 "pere": "Doğanın kalbinde, muhteşem manzaralar eşliğinde yürüyüş deneyimi.",
-                "image": "Images/tazikanyon.jpg"
+                "image": "Images/tazi.jpeg"
             },
             "en": {
                 "name": "Tazı Canyon Tour",
                 "pere": "Hiking experience with stunning views in the heart of nature.",
-                "image": "Images/tazikanyon.jpg"
+                "image": "Images/tazi.jpeg"
             },
             "ru": {
                 "name": "Тур по каньону Тазы",
                 "pere": "Поход с великолепными видами в сердце природы.",
-                "image": "Images/tazikanyon.jpg"
+                "image": "Images/tazi.jpeg"
             }
         },
         "location": {
@@ -260,23 +261,93 @@
             "tr": {
                 "name": "Macera Parkı",
                 "pere": "Zipline, tırmanma ve daha fazlası ile dolu dolu eğlence.",
-                "image": "Images/maceraparki.jpg"
+                "image": "Images/zipline.jpeg"
             },
             "en": {
                 "name": "Adventure Park",
                 "pere": "Full of fun with zipline, climbing, and much more.",
-                "image": "Images/maceraparki.jpg"
+                "image": "Images/zipline.jpeg"
             },
             "ru": {
                 "name": "Парк приключений",
                 "pere": "Полный веселья с зиплайном, скалолазанием и многое другое.",
-                "image": "Images/maceraparki.jpg"
+                "image": "Images/zipline.jpeg"
             }
         },
         "location": {
             "tr": "Beşkonak",
             "en": "Beskonak",
             "ru": "Бешконак"
+        }
+    },
+    {
+        "id": 9,
+        "buy": {
+            "tr": "Rezervasyon",
+            "en": "Reservation",
+            "ru": "Бронирование"
+        },
+        "days": {
+            "tr": "Gün boyu turlar",
+            "en": "All-day tours",
+            "ru": "Туры на целый день"
+        },
+        "translations": {
+            "tr": {
+                "name": "Cabrio Safari",
+                "pere": "Keşfedilmemiş rotalarda cabrio ile maceraya atılın.",
+                "image": "Images/cabriosafari.jpeg"
+            },
+            "en": {
+                "name": "Cabrio Safari",
+                "pere": "Embark on an adventure with a cabrio on undiscovered routes.",
+                "image": "Images/cabriosafari.jpeg"
+            },
+            "ru": {
+                "name": "Кабрио-сафари",
+                "pere": "Отправляйтесь в приключение на кабрио по неизведанным маршрутам.",
+                "image": "Images/cabriosafari.jpeg"
+            }
+        },
+        "location": {
+            "tr": "Doğa Parkuru",
+            "en": "Nature Trail",
+            "ru": "Природная тропа"
+        }
+    },
+      {
+        "id": 10,
+        "buy": {
+            "tr": "Rezervasyon",
+            "en": "Reservation",
+            "ru": "Бронирование"
+        },
+        "days": {
+            "tr": "Gün boyu turlar",
+            "en": "All-day tours",
+            "ru": "Туры на целый день"
+        },
+        "translations": {
+            "tr": {
+                "name": "Supboard",
+                "pere": "Keşfedilmemiş rotalarda supboard ile maceraya atılın.",
+                "image": "Images/supboard.png"
+            },
+            "en": {
+                "name": "Supboard",
+                "pere": "Embark on an adventure with a supboard on undiscovered routes.",
+                "image": "Images/supboard.png"
+            },
+            "ru": {
+                "name": "Сапборд",
+                "pere": "Отправляйтесь в приключение на сапборде по неизведанным маршрутам.",
+                "image": "Images/supboard.png"
+            }
+        },
+        "location": {
+            "tr": "Supboard Keyfi",
+            "en": "Supboard Fun",
+            "ru": "Сапборд Удовольствие"
         }
     }
 ]

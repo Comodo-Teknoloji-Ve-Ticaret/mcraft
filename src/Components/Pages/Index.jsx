@@ -29,13 +29,6 @@ function Index() {
     const getPublicAssetUrl = (path) => encodeURI(`${import.meta.env.BASE_URL}${path.replace(/^\/+/, '')}`);
     const whatsappBaseUrl = 'https://wa.me/905331530229';
 
-    const scrollToDestinations = () => {
-        destinationsRef.current?.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-        });
-    };
-
     const comboSectionContent = {
         tr: {
             badge: '4LU COMBO',
@@ -135,6 +128,7 @@ function Index() {
     const currentLanguage = useMemo(() => (i18n.language || 'en').split('-')[0], [i18n.language]);
     const defaultLanguage = useMemo(() => ['tr', 'en', 'de'].includes(currentLanguage) ? currentLanguage : 'en', [currentLanguage]);
     const destinationLanguage = useMemo(() => ['tr', 'en', 'ru'].includes(currentLanguage) ? currentLanguage : 'en', [currentLanguage]);
+    const heroLanguage = useMemo(() => ['tr', 'en', 'ru', 'de'].includes(currentLanguage) ? currentLanguage : 'en', [currentLanguage]);
     const selectedComboSection = useMemo(() => comboSectionContent[defaultLanguage] || comboSectionContent.en, [defaultLanguage]);
 
     const buildWhatsappLink = (text) => `${whatsappBaseUrl}?text=${encodeURIComponent(text)}`;
@@ -157,6 +151,22 @@ function Index() {
         };
 
         return messages[destinationLanguage] || messages.en;
+    };
+
+    const createHeroWhatsappMessage = (buttonLabel) => {
+        const messages = {
+            tr: `Merhaba, ${buttonLabel} secenegi icin bilgi ve rezervasyon almak istiyorum.`,
+            en: `Hello, I would like information and reservation details for ${buttonLabel}.`,
+            ru: `Здравствуйте, я хочу получить информацию и детали бронирования по опции ${buttonLabel}.`,
+            de: `Hallo, ich moechte Informationen und Reservierungsdetails fuer die Option ${buttonLabel} erhalten.`
+        };
+
+        return messages[heroLanguage] || messages.en;
+    };
+
+    const openHeroWhatsapp = (buttonLabel) => {
+        const link = buildWhatsappLink(createHeroWhatsappMessage(buttonLabel));
+        window.open(link, '_blank', 'noopener,noreferrer');
     };
 
     const comboReservationLabel = {
@@ -189,7 +199,7 @@ function Index() {
                         <div className="hero-content w-100 d-flex flex-column justify-content-center align-items-center text-center">                            <h1 className='text-white'>MC Raft</h1>
                             <h2 className="text-white">{t('hero.slide1.title')}</h2>
                             <p className="text-white fs-5">{t('hero.slide1.description')}</p>
-                            <button onClick={scrollToDestinations} className="btn text-white hero-btn mt-4">{t('explore')} <img src={btnArrow} className="img-fluid ms-2" alt="" /></button>
+                            <button onClick={() => openHeroWhatsapp(t('explore'))} className="btn text-white hero-btn mt-4">{t('explore')} <img src={btnArrow} className="img-fluid ms-2" alt="" /></button>
                         </div>
                     </div>
                 </SwiperSlide>
@@ -200,7 +210,7 @@ function Index() {
                             <h1 className='text-white'>MC Raft</h1>
                             <h2 className="text-white">{t('hero.slide2.title')}</h2>
                             <p className="text-white fs-5">{t('hero.slide2.description')}</p>
-                            <button className="btn text-white hero-btn mt-4">{t('viewTour')} <img src={btnArrow} className="img-fluid ms-2" alt="" /></button>
+                            <button onClick={() => openHeroWhatsapp(t('viewTour'))} className="btn text-white hero-btn mt-4">{t('viewTour')} <img src={btnArrow} className="img-fluid ms-2" alt="" /></button>
                         </div>
                     </div>
                 </SwiperSlide>
@@ -211,7 +221,7 @@ function Index() {
                             <h1 className='text-white'>MC Raft</h1>
                             <h2 className="text-white">{t('hero.slide3.title')}</h2>
                             <p className="text-white fs-5">{t('hero.slide3.description')}</p>
-                            <button className="btn text-white hero-btn mt-4">{t('viewDetails')} <img src={btnArrow} className="img-fluid ms-2" alt="" /></button>
+                            <button onClick={() => openHeroWhatsapp(t('viewDetails'))} className="btn text-white hero-btn mt-4">{t('viewDetails')} <img src={btnArrow} className="img-fluid ms-2" alt="" /></button>
                         </div>
                     </div>
                 </SwiperSlide>
