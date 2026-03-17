@@ -294,12 +294,12 @@
         },
         "translations": {
             "tr": {
-                "name": "Cabrio Safari",
-                "pere": "Keşfedilmemiş rotalarda cabrio ile maceraya atılın.",
-                "image": "Images/cabriosafari.jpeg"
+                "name": "Monster Safari",
+                "pere": "Keşfedilmemiş rotalarda monster ile maceraya atılın.",
+                "image": "Images/monstersafari.jpeg"
             },
             "en": {
-                "name": "Cabrio Safari",
+                "name": "Monster Safari",
                 "pere": "Embark on an adventure with a cabrio on undiscovered routes.",
                 "image": "Images/cabriosafari.jpeg"
             },
