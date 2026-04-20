@@ -2,8 +2,9 @@ User-agent: *
 Allow: /
 
 # Önemli sayfalar
-Allow: /activities
-Allow: /contact
+Allow: /#/activities
+Allow: /#/contact
 
 # Sitemap
 Sitemap: https://mcraftantalya.com/sitemap.xml
+Sitemap: https://mcraftantalya.com/sitemap.txt
